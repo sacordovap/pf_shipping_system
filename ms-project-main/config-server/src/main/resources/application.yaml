@@ -1,0 +1,17 @@
+server:
+  port: 8888 # Puerto estándar
+
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: file:///D:/projects/Steven_Cordova_PF/ms-config-repo
+          default-label: main # deafult branch
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/

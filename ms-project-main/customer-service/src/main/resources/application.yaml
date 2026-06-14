@@ -1,0 +1,45 @@
+spring:
+  application:
+    name: customer-service
+  config:
+    import: "optional:configserver:http://localhost:8888"
+
+# =========================================================================
+# LÍNEAS MIGRADAS
+# =========================================================================
+# server:
+#   port: 8082
+# spring:
+#   datasource:
+#     url: jdbc:postgresql://localhost:5432/customer-db
+#     username: postgres
+#     password: postgres
+#     driver-class-name: org.postgresql.Driver
+#   jpa:
+#     database-platform: org.hibernate.dialect.PostgreSQLDialect
+#     hibernate:
+#       ddl-auto: update
+#     show-sql: true
+#     properties:
+#       hibernate:
+#         format_sql: true
+# eureka:
+#   client:
+#     register-with-eureka: true
+#     fetch-registry: true
+#     service-url:
+#       defaultZone: http://localhost:8761/eureka/
+# logging:
+#   level:
+#     com.example.scurity: DEBUG
+#     org.hibernate.SQL: DEBUG
+#     org.hibernate.orm.jdbc.bind: TRACE
+#     org.springframework.web: INFO
+#     org.springframework.security: DEBUG
+# api:
+#   reniec:
+#     url: https://api.decolecta.com/v1/reniec
+#     token: sk_15849.UyCCTINpIycQ2Typ6WVMJmngsZH0NP7C
+# jwt:
+#   expiration: 3600000
+#   secret: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970demoSecretforFinalExamSpringSecurity

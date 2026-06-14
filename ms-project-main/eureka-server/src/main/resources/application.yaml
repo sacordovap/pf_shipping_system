@@ -1,0 +1,21 @@
+server:
+  port: 8761
+
+spring:
+  application:
+    name: eureka-server
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+
+# ◄ AQUÍ AGREGAMOS TUS LÍNEAS DE LOG TRADUCIDAS A YAML
+logging:
+  level:
+    com.netflix.eureka: WARN
+    com.netflix.discovery: WARN

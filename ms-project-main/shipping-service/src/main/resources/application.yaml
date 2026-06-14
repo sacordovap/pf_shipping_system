@@ -1,0 +1,41 @@
+spring:
+  application:
+    name: shipping-service
+  config:
+    import: "optional:configserver:http://localhost:8888"
+
+# =========================================================================
+# LÍNEAS MIGRADAS
+# =========================================================================
+# server:
+#   port: 8083
+# spring:
+#   datasource:
+#     url: jdbc:postgresql://localhost:5432/shipping-db
+#     username: postgres
+#     password: postgres
+#     driver-class-name: org.postgresql.Driver
+#   jpa:
+#     database-platform: org.hibernate.dialect.PostgreSQLDialect
+#     hibernate:
+#       ddl-auto: update
+#     show-sql: true
+#     properties:
+#       hibernate:
+#         format_sql: true
+# eureka:
+#   client:
+#     register-with-eureka: true
+#     fetch-registry: true
+#     service-url:
+#       defaultZone: http://localhost:8761/eureka/
+# logging:
+#   level:
+#     com.example.scurity: DEBUG
+#     org.hibernate.SQL: DEBUG
+#     org.hibernate.orm.jdbc.bind: TRACE
+#     org.springframework.web: INFO
+#     org.springframework.security: DEBUG
+# jwt:
+#   expiration: 3600000
+#   secret: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970demoSecretforFinalExamSpringSecurity
