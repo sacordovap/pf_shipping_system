@@ -66,10 +66,11 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/api/v1/categories").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/v1/shippings/tracking/*/history").hasAnyRole("ADMIN", "OPERADOR", "CLIENTE")
                         .requestMatchers(HttpMethod.DELETE, "/api/v1/shippings/*").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.PATCH, "/api/v1/shippings/*/state").hasAnyRole("ADMIN", "OPERADOR").requestMatchers(HttpMethod.GET, "/api/v1/shippings/searchName").hasAnyRole("ADMIN", "OPERADOR")
+                        .requestMatchers(HttpMethod.PATCH, "/api/v1/shippings/*/state").hasAnyRole("ADMIN", "OPERADOR")
+                        .requestMatchers(HttpMethod.GET, "/api/v1/shippings/searchName").hasAnyRole("ADMIN", "OPERADOR")
                         .requestMatchers(HttpMethod.GET, "/api/v1/shippings/search").hasAnyRole("ADMIN", "OPERADOR")
                         .requestMatchers(HttpMethod.GET, "/api/v1/shippings/filter").hasAnyRole("ADMIN", "OPERADOR")
-                        .requestMatchers(HttpMethod.GET, "/api/v1/shippings/filter/category").hasAnyRole("ADMIN", "OPERADOR") // Corregido: eliminado el //
+                        .requestMatchers(HttpMethod.GET, "/api/v1/shippings/filter/category").hasAnyRole("ADMIN", "OPERADOR")
                         .requestMatchers(HttpMethod.POST, "/api/v1/shippings").hasAnyRole("ADMIN", "OPERADOR")
                         .requestMatchers(HttpMethod.GET, "/api/v1/shippings/*").hasAnyRole("ADMIN", "OPERADOR", "CLIENTE")
                         .anyRequest().authenticated()
