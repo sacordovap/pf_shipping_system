@@ -1,0 +1,1339 @@
+{
+  "info": {
+    "_postman_id": "d9fe8783-b85f-4865-b412-e9a626dd8ba0",
+    "name": "FINAL EXAM",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "18205993",
+    "_collection_link": "https://go.postman.co/collection/18205993-d9fe8783-b85f-4865-b412-e9a626dd8ba0?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "AuthService",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"nombre\": \"JOHN DOE\",\r\n    \"email\": \"user6@example.com\",\r\n    \"password\": \"Password123/\",\r\n    \"role\": \"CLIENTE\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8081/api/v1/auth/register",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8081",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"user2@example.com\",\r\n    \"password\": \"Password123/\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8081/api/v1/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8081",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "getAll",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMUBleGFtcGxlLmNvbSIsImlhdCI6MTc4MDA5MjUzMCwicm9sZSI6Ik9QRVJBRE9SIiwiZXhwIjoxNzgwMDk2MTMwfQ.6-Uzyoy3QkN_I0Cxt0b0bcU8_csdD9M8BIpFqSeS-K3NgQc8KZyl1kvjWgg8yVVdERx1xxF8CuG0WkrW-Xxevw",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8081/api/v1/auth/users",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8081",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "users"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "CustomerService",
+      "item": [
+        {
+          "name": "save",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"dni\": \"71715242\",\r\n  \"email\": \"test4@example.com\",\r\n  \"phoneNumber\": \"+51999888777\",\r\n  \"addresses\": [\r\n    {\r\n      \"street\": \"Av. Las Flores 123 - Dpto 402\",\r\n      \"city\": \"Arequipa\",\r\n      \"department\": \"Arequipa\"\r\n    },\r\n    {\r\n      \"street\": \"Calle Mercaderes 456 (Oficina)\",\r\n      \"city\": \"Arequipa\",\r\n      \"department\": \"Arequipa\"\r\n    }\r\n  ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8082/api/v1/customers",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8082",
+              "path": [
+                "api",
+                "v1",
+                "customers"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "getById",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8082/api/v1/customers/f032af6b-ef45-4922-ae5e-f564748526a9",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8082",
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                "f032af6b-ef45-4922-ae5e-f564748526a9"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "getByDNI",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8082/api/v1/customers/dni/74713501",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8082",
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                "dni",
+                "74713501"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "getALL",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8082/api/v1/customers",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8082",
+              "path": [
+                "api",
+                "v1",
+                "customers"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "updByID",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"dni\": \"71428596\",\r\n    \"email\": \"carlos.mendoza@email.com\",\r\n    \"phoneNumber\": \"+51955443322\",\r\n    \"addresses\": [\r\n        {\r\n            \"street\": \"Av. Emmel 405 - Dpto 301\",\r\n            \"city\": \"Yanahuara\",\r\n            \"department\": \"Arequipa\"\r\n        },\r\n        {\r\n            \"street\": \"Av. Javier Prado Este 2540\",\r\n            \"city\": \"San Borja\",\r\n            \"department\": \"Lima\"\r\n        }\r\n    ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8082/api/v1/customers/f032af6b-ef45-4922-ae5e-f564748526a9",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8082",
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                "f032af6b-ef45-4922-ae5e-f564748526a9"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delById",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8082/api/v1/customers/f032af6b-ef45-4922-ae5e-f564748526a9",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8082",
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                "f032af6b-ef45-4922-ae5e-f564748526a9"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "activateById",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzY29yZG92YUBleGFtcGxlLmNvbSIsInVzZXJuYW1lIjoiU0NPUkRPVkEiLCJpYXQiOjE3ODA5NDAxNzcsInJvbGUiOiJBRE1JTiIsImV4cCI6MTc4MDk0Mzc3N30.ERT4LyNKFOMtgqXfh-GMGfh2e4Zp8S_ChM4KI304giJnY_fdholNKWoVHMZS0dya-TANi7xlYTQRfWIJt2gmoA",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8082/api/v1/customers/f032af6b-ef45-4922-ae5e-f564748526a9/activate",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8082",
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                "f032af6b-ef45-4922-ae5e-f564748526a9",
+                "activate"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "shippingService",
+      "item": [
+        {
+          "name": "create",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMUBleGFtcGxlLmNvbSIsImlhdCI6MTc4MDQwODY2NSwicm9sZSI6Ik9QRVJBRE9SIiwiZXhwIjoxNzgwNDEyMjY1fQ.L6jTG1-_w3ijclWEggcHyjYE7uDwvAI4HiFt5YR5lJ8M7_oWQiqdxLHO8hVhrPLBQN8yptZLUcgxaxNpktmmIw",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"dniRemitente\": \"74713501\",\r\n    \"dniDestinatario\": \"74713501\",\r\n    \"originBranch\": \"Arequipa\",\r\n    \"description\": \"Laptop Asus ROG con cargador y mouse gamer\",\r\n    \"destinationBranch\": \"Lima\",\r\n    \"weight\": 4.25,\r\n    \"declaredValue\": 180.00,\r\n    \"categoryIds\": [\r\n        \"a31d0440-f3d6-4856-9594-61d06a3615e3\",\r\n        \"89a4f882-a251-4db6-921c-ed881eb589c0\"\r\n    ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8083/api/v1/shippings",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "v1",
+                "shippings"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "tracking",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/api/v1/shippings/tracking/TRK-8094CD1B",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "v1",
+                "shippings",
+                "tracking",
+                "TRK-8094CD1B"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "srcPredictive",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzY29yZG92YUBleGFtcGxlLmNvbSIsInVzZXJuYW1lIjoiU0NPUkRPVkEiLCJpYXQiOjE3ODA5NDM0NzgsInJvbGUiOiJBRE1JTiIsImV4cCI6MTc4MDk0NzA3OH0.JfjghQp85GyirSJ_R2OIjFApzUV0edqq2gXoQeC7R77oNILxDmiUUvR9kU3z0lp2rOTqK73g31QThWs8LRkp0w",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/v1/shippings/search?term=trk",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "shippings",
+                "search"
+              ],
+              "query": [
+                {
+                  "key": "term",
+                  "value": "trk"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "APIGATEWAY",
+      "item": [
+        {
+          "name": "AuthService Copy",
+          "item": [
+            {
+              "name": "Register",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"nombre\": \"JOHN DOE\",\r\n    \"email\": \"test3@example.com\",\r\n    \"password\": \"Password123/\",\r\n    \"username\": \"USER03\",\r\n    \"role\": \"CLIENTE\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/api/v1/auth/register",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "register"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Login",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\": \"test2@example.com\",\r\n    \"password\": \"Password123/\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/api/v1/auth/login",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "getAll",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzY29yZG92YUBleGFtcGxlLmNvbSIsInVzZXJuYW1lIjoiU0NPUkRPVkEiLCJpYXQiOjE3ODEwMTg1NjQsInJvbGUiOiJBRE1JTiIsImV4cCI6MTc4MTAyMjE2NH0.Jux_m8qZebEzhAjAiETH3AqG33B_X5u8UaB5ekAPLMOX8xdwyU6La6KEVm4yeBpPMllD7puMmZtMsEYCta8eZw",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/api/v1/auth/users",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "users"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "CustomerService",
+          "item": [
+            {
+              "name": "save",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0MkBleGFtcGxlLmNvbSIsInVzZXJuYW1lIjoiVVNFUjAyIiwiaWF0IjoxNzgxNDc3MTk5LCJyb2xlIjoiQURNSU4iLCJleHAiOjE3ODE0ODA3OTl9.spFVbbSKLGLMKvf1pEce_kxCd2f6CuKBh2VtS3U2DZBh0Ax4RPhY1XJEpnJGQFWaSIgWcOGIexU2LGPWjy927w",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"dni\": \"74854142\",\r\n  \"email\": \"test5@example.com\",\r\n  \"phoneNumber\": \"+51999888777\",\r\n  \"addresses\": [\r\n    {\r\n      \"street\": \"Av. Las Flores 123 - Dpto 402\",\r\n      \"city\": \"Arequipa\",\r\n      \"department\": \"Arequipa\"\r\n    },\r\n    {\r\n      \"street\": \"Calle Mercaderes 456 (Oficina)\",\r\n      \"city\": \"Arequipa\",\r\n      \"department\": \"Arequipa\"\r\n    }\r\n  ]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/api/v1/customers",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "getById",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzY29yZG92YUBleGFtcGxlLmNvbSIsInVzZXJuYW1lIjoiU0NPUkRPVkEiLCJpYXQiOjE3ODEwMTgwMzAsInJvbGUiOiJBRE1JTiIsImV4cCI6MTc4MTAyMTYzMH0.TOES87Ryf43Vf9DBTjiYx-plhpdoCy_d2MIdxbGdm1D-_-zmvE9BLN0U6_FpBhLdCE4G-tFkX7Xjud4UjQ8EFA",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/api/v1/customers/c0b273d7-2819-4203-8f79-02e73c97ae42",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    "c0b273d7-2819-4203-8f79-02e73c97ae42"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "getByDNI",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzY29yZG92YUBleGFtcGxlLmNvbSIsInVzZXJuYW1lIjoiU0NPUkRPVkEiLCJpYXQiOjE3ODEwMTgwMzAsInJvbGUiOiJBRE1JTiIsImV4cCI6MTc4MTAyMTYzMH0.TOES87Ryf43Vf9DBTjiYx-plhpdoCy_d2MIdxbGdm1D-_-zmvE9BLN0U6_FpBhLdCE4G-tFkX7Xjud4UjQ8EFA",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/api/v1/customers/dni/74713501",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    "dni",
+                    "74713501"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "getALL",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzY29yZG92YUBleGFtcGxlLmNvbSIsInVzZXJuYW1lIjoiU0NPUkRPVkEiLCJpYXQiOjE3ODA5NDAxNzcsInJvbGUiOiJBRE1JTiIsImV4cCI6MTc4MDk0Mzc3N30.ERT4LyNKFOMtgqXfh-GMGfh2e4Zp8S_ChM4KI304giJnY_fdholNKWoVHMZS0dya-TANi7xlYTQRfWIJt2gmoA",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/api/v1/customers",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "updByID",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzY29yZG92YUBleGFtcGxlLmNvbSIsInVzZXJuYW1lIjoiU0NPUkRPVkEiLCJpYXQiOjE3ODEwMTgwMzAsInJvbGUiOiJBRE1JTiIsImV4cCI6MTc4MTAyMTYzMH0.TOES87Ryf43Vf9DBTjiYx-plhpdoCy_d2MIdxbGdm1D-_-zmvE9BLN0U6_FpBhLdCE4G-tFkX7Xjud4UjQ8EFA",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"dni\": \"71428596\",\r\n    \"email\": \"carlos.mendoza@email.com\",\r\n    \"phoneNumber\": \"+51955443322\",\r\n    \"addresses\": [\r\n        {\r\n            \"street\": \"Av. Emmel 405 - Dpto 301\",\r\n            \"city\": \"Yanahuara\",\r\n            \"department\": \"Arequipa\"\r\n        }\r\n    ]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8082/api/v1/customers/c0b273d7-2819-4203-8f79-02e73c97ae42",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8082",
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    "c0b273d7-2819-4203-8f79-02e73c97ae42"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "delById",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzY29yZG92YUBleGFtcGxlLmNvbSIsInVzZXJuYW1lIjoiU0NPUkRPVkEiLCJpYXQiOjE3ODEwMTgwMzAsInJvbGUiOiJBRE1JTiIsImV4cCI6MTc4MTAyMTYzMH0.TOES87Ryf43Vf9DBTjiYx-plhpdoCy_d2MIdxbGdm1D-_-zmvE9BLN0U6_FpBhLdCE4G-tFkX7Xjud4UjQ8EFA",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/api/v1/customers/0f70c533-0361-418f-b2e7-6e7e3277289d",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    "0f70c533-0361-418f-b2e7-6e7e3277289d"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "activateById",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzY29yZG92YUBleGFtcGxlLmNvbSIsInVzZXJuYW1lIjoiU0NPUkRPVkEiLCJpYXQiOjE3ODEwMTgwMzAsInJvbGUiOiJBRE1JTiIsImV4cCI6MTc4MTAyMTYzMH0.TOES87Ryf43Vf9DBTjiYx-plhpdoCy_d2MIdxbGdm1D-_-zmvE9BLN0U6_FpBhLdCE4G-tFkX7Xjud4UjQ8EFA",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/api/v1/customers/0f70c533-0361-418f-b2e7-6e7e3277289d/activate",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    "0f70c533-0361-418f-b2e7-6e7e3277289d",
+                    "activate"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "shippingService",
+          "item": [
+            {
+              "name": "Categories",
+              "item": [
+                {
+                  "name": "getALLcategories",
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0MkBleGFtcGxlLmNvbSIsInVzZXJuYW1lIjoiVVNFUjAyIiwiaWF0IjoxNzgxNDQ0OTk0LCJyb2xlIjoiQURNSU4iLCJleHAiOjE3ODE0NDg1OTR9.GxbIJKPF6q4YTsAPUCKgORvIJ2k3nGQWFbruj5zhR7Zj3Ho5Ft_HogKnksA5IQDw6wayU07wzStODcdt7ZcIkg",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "http://localhost:8080/api/v1/categories",
+                      "protocol": "http",
+                      "host": [
+                        "localhost"
+                      ],
+                      "port": "8080",
+                      "path": [
+                        "api",
+                        "v1",
+                        "categories"
+                      ]
+                    }
+                  },
+                  "response": []
+                }
+              ]
+            },
+            {
+              "name": "create",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0MkBleGFtcGxlLmNvbSIsInVzZXJuYW1lIjoiVVNFUjAyIiwiaWF0IjoxNzgxNDc3MTk5LCJyb2xlIjoiQURNSU4iLCJleHAiOjE3ODE0ODA3OTl9.spFVbbSKLGLMKvf1pEce_kxCd2f6CuKBh2VtS3U2DZBh0Ax4RPhY1XJEpnJGQFWaSIgWcOGIexU2LGPWjy927w",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"dniRemitente\": \"74713501\",\r\n    \"dniDestinatario\": \"75076828\",\r\n    \"originBranch\": \"Arequipa\",\r\n    \"description\": \"Laptop Asus ROG con cargador y mouse gamer\",\r\n    \"destinationBranch\": \"Lima\",\r\n    \"weight\": 4.25,\r\n    \"declaredValue\": 180.00,\r\n    \"categoryIds\": [\r\n       \"46a49012-feea-4095-9c22-d2b2b19923b1\"\r\n    ]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/api/v1/shippings",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "v1",
+                    "shippings"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "tracking",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/api/v1/shippings/tracking/TRK-2AF34D80",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "v1",
+                    "shippings",
+                    "tracking",
+                    "TRK-2AF34D80"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "srcPredictive",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0MkBleGFtcGxlLmNvbSIsInVzZXJuYW1lIjoiVVNFUjAyIiwiaWF0IjoxNzgxNDc3MTk5LCJyb2xlIjoiQURNSU4iLCJleHAiOjE3ODE0ODA3OTl9.spFVbbSKLGLMKvf1pEce_kxCd2f6CuKBh2VtS3U2DZBh0Ax4RPhY1XJEpnJGQFWaSIgWcOGIexU2LGPWjy927w",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8083/api/v1/shippings/search?term=TRK-",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8083",
+                  "path": [
+                    "api",
+                    "v1",
+                    "shippings",
+                    "search"
+                  ],
+                  "query": [
+                    {
+                      "key": "term",
+                      "value": "TRK-"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "srcName",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0MkBleGFtcGxlLmNvbSIsInVzZXJuYW1lIjoiVVNFUjAyIiwiaWF0IjoxNzgxNDc3MTk5LCJyb2xlIjoiQURNSU4iLCJleHAiOjE3ODE0ODA3OTl9.spFVbbSKLGLMKvf1pEce_kxCd2f6CuKBh2VtS3U2DZBh0Ax4RPhY1XJEpnJGQFWaSIgWcOGIexU2LGPWjy927w",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/api/v1/shippings/searchName?name=puma",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "v1",
+                    "shippings",
+                    "searchName"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "puma"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "UPD_STATUS",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0MkBleGFtcGxlLmNvbSIsInVzZXJuYW1lIjoiVVNFUjAyIiwiaWF0IjoxNzgxNDQ0OTk0LCJyb2xlIjoiQURNSU4iLCJleHAiOjE3ODE0NDg1OTR9.GxbIJKPF6q4YTsAPUCKgORvIJ2k3nGQWFbruj5zhR7Zj3Ho5Ft_HogKnksA5IQDw6wayU07wzStODcdt7ZcIkg",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"newState\": \"EN_TRANSITO\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/api/v1/shippings/253d9381-8ff0-4d0b-b848-f9d5f02e7eb8/state",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "v1",
+                    "shippings",
+                    "253d9381-8ff0-4d0b-b848-f9d5f02e7eb8",
+                    "state"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GET_MULTIPLE",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0MkBleGFtcGxlLmNvbSIsInVzZXJuYW1lIjoiVVNFUjAyIiwiaWF0IjoxNzgxNDc3MTk5LCJyb2xlIjoiQURNSU4iLCJleHAiOjE3ODE0ODA3OTl9.spFVbbSKLGLMKvf1pEce_kxCd2f6CuKBh2VtS3U2DZBh0Ax4RPhY1XJEpnJGQFWaSIgWcOGIexU2LGPWjy927w",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/api/v1/shippings/filter?branch=Lima&state=REGISTRADO",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "v1",
+                    "shippings",
+                    "filter"
+                  ],
+                  "query": [
+                    {
+                      "key": "branch",
+                      "value": "Lima"
+                    },
+                    {
+                      "key": "state",
+                      "value": "REGISTRADO"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "REVERT ESTADO",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0MkBleGFtcGxlLmNvbSIsInVzZXJuYW1lIjoiVVNFUjAyIiwiaWF0IjoxNzgxNDQ0OTk0LCJyb2xlIjoiQURNSU4iLCJleHAiOjE3ODE0NDg1OTR9.GxbIJKPF6q4YTsAPUCKgORvIJ2k3nGQWFbruj5zhR7Zj3Ho5Ft_HogKnksA5IQDw6wayU07wzStODcdt7ZcIkg",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/api/v1/shippings/253d9381-8ff0-4d0b-b848-f9d5f02e7eb8/revert",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "v1",
+                    "shippings",
+                    "253d9381-8ff0-4d0b-b848-f9d5f02e7eb8",
+                    "revert"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "HistoryTrack",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzY29yZG92YUBleGFtcGxlLmNvbSIsInVzZXJuYW1lIjoiU0NPUkRPVkEiLCJpYXQiOjE3ODExNDg3NzcsInJvbGUiOiJBRE1JTiIsImV4cCI6MTc4MTE1MjM3N30.4n_7tPhhBzf9YwdWWub7pMmUt-62MGTsUkoRsr-5_NswGMiLkXn-FqE8T1Bq4YawXh_nUkOm4pXNkpc7hoxiPQ",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/api/v1/shippings/tracking/TRK-62C54D6E/history",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "v1",
+                    "shippings",
+                    "tracking",
+                    "TRK-62C54D6E",
+                    "history"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "SRCCTEGORY-STATE",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0MkBleGFtcGxlLmNvbSIsInVzZXJuYW1lIjoiVVNFUjAyIiwiaWF0IjoxNzgxNDc3MTk5LCJyb2xlIjoiQURNSU4iLCJleHAiOjE3ODE0ODA3OTl9.spFVbbSKLGLMKvf1pEce_kxCd2f6CuKBh2VtS3U2DZBh0Ax4RPhY1XJEpnJGQFWaSIgWcOGIexU2LGPWjy927w",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/api/v1/shippings/filter/category?category=Documentos&state=REGISTRADO",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "v1",
+                    "shippings",
+                    "filter",
+                    "category"
+                  ],
+                  "query": [
+                    {
+                      "key": "category",
+                      "value": "Documentos"
+                    },
+                    {
+                      "key": "state",
+                      "value": "REGISTRADO"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GETByID",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzY29yZG92YUBleGFtcGxlLmNvbSIsInVzZXJuYW1lIjoiU0NPUkRPVkEiLCJpYXQiOjE3ODExNDg3NzcsInJvbGUiOiJBRE1JTiIsImV4cCI6MTc4MTE1MjM3N30.4n_7tPhhBzf9YwdWWub7pMmUt-62MGTsUkoRsr-5_NswGMiLkXn-FqE8T1Bq4YawXh_nUkOm4pXNkpc7hoxiPQ",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/api/v1/shippings/24a8c980-b3fc-4acb-b020-3ee4a432b417",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "v1",
+                    "shippings",
+                    "24a8c980-b3fc-4acb-b020-3ee4a432b417"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "DELETE SHIPPING",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzY29yZG92YUBleGFtcGxlLmNvbSIsInVzZXJuYW1lIjoiU0NPUkRPVkEiLCJpYXQiOjE3ODExNDg3NzcsInJvbGUiOiJBRE1JTiIsImV4cCI6MTc4MTE1MjM3N30.4n_7tPhhBzf9YwdWWub7pMmUt-62MGTsUkoRsr-5_NswGMiLkXn-FqE8T1Bq4YawXh_nUkOm4pXNkpc7hoxiPQ",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/api/v1/shippings/24a8c980-b3fc-4acb-b020-3ee4a432b417",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "v1",
+                    "shippings",
+                    "24a8c980-b3fc-4acb-b020-3ee4a432b417"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Default",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8888/api-gateway/default",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8888",
+              "path": [
+                "api-gateway",
+                "default"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "HEALTH",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "46a49012-feea-4095-9c22-d2b2b19923b1",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/actuator/health",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "actuator",
+                "health"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "CIRCUIT",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0MkBleGFtcGxlLmNvbSIsInVzZXJuYW1lIjoiVVNFUjAyIiwiaWF0IjoxNzgxMzczNTkyLCJyb2xlIjoiQURNSU4iLCJleHAiOjE3ODEzNzcxOTJ9.UnvOvLPG9JYCeGKGJssaEwLMUTqCZ4I4aT1D7oeQoJGV_4XCuT0ckhtKDwB93kDrRZa9P-8FzFFmo5A2_FaCSg",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/actuator/circuitbreakers",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "actuator",
+                "circuitbreakers"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "REFRESH",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/actuator/refresh",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "actuator",
+                "refresh"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "token",
+      "value": "",
+      "type": "default"
+    }
+  ]
+}
