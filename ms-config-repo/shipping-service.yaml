@@ -1,0 +1,78 @@
+server:
+  port: 8083
+
+spring:
+  datasource:
+    url: jdbc:postgresql://postgres-shipping:5432/shipping_db
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  
+  # ACTIVAR EL CIRCUITO INTERNO EN FEIGN
+  cloud:
+    openfeign:
+      circuitbreaker:
+        enabled: false
+      client:
+        config:
+          customerFeignClient: 
+            connectTimeout: 2000
+            readTimeout: 3000
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE:http://localhost:8761/eureka}
+  instance:
+    prefer-ip-address: true
+
+logging:
+  level:
+    com.example.scurity: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.orm.jdbc.bind: TRACE
+    org.springframework.web: INFO
+    org.springframework.security: DEBUG
+    io.github.resilience4j: DEBUG 
+
+jwt:
+  expiration: 3600000
+  secret: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970demoSecretforFinalExamSpringSecurity
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "refresh,health,info,circuitbreakers,metrics"
+  endpoint:
+    health:
+      show-details: always
+
+# CONFIGURACIÓN CENTRALIZADA DEL CIRCUIT BREAKER
+resilience4j:
+  circuitbreaker:
+    instances:
+      customer-service: #ID exacto de tu anotación @CircuitBreaker(name = "customer-service")
+        slidingWindowSize: 10
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10s
+        permittedNumberOfCallsInHalfOpenState: 3
+        slowCallDurationThreshold: 2s
+        slowCallRateThreshold: 80
+        registerHealthIndicator: true # Integra /actuator/health
+
+# Propiedades de negocio configurables
+tarifa:
+  base: 20
+  factor-peso: 5
+  insureance: 0.01
