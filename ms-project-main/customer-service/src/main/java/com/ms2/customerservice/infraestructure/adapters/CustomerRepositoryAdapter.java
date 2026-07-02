@@ -80,7 +80,7 @@ public class CustomerRepositoryAdapter implements CustomerRepositoryPortOut {
 
     @Override
     public List<Customer> findAll() {
-        List<CustomerEntity> entities = customerJpaRepository.findAll();
+        List<CustomerEntity> entities = customerJpaRepository.findAllByOrderByIdAsc();
         List<Customer> domainList = new ArrayList<>();
         for (CustomerEntity entity : entities) {
             domainList.add(mapToDomain(entity));

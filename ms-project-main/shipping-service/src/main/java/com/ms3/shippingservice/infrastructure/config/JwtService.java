@@ -36,6 +36,11 @@ public class JwtService implements JwtPortOut {
         return claims.get("username", String.class);
     }
 
+    public String extractUserId(String token) {
+        Claims claims = extractClaims(token);
+        return claims.get("userId", String.class);
+    }
+
     public String extractEmail(String token) {
         Claims claims = extractClaims(token);
         return claims.getSubject();
@@ -62,5 +67,9 @@ public class JwtService implements JwtPortOut {
 
     private SecretKey getSignKey() {
         return Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
+    }
+
+    public Claims extractAllClaims(String token) {
+        return extractClaims(token);
     }
 }

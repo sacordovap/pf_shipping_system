@@ -64,7 +64,7 @@ class AuthServiceTest {
 
         when(userPortOut.findByEmail(request.getEmail())).thenReturn(Optional.of(mockUser));
         when(passwordEncoder.matches(request.getPassword(), mockUser.getPassword())).thenReturn(true);
-        when(jwtPortOut.generateToken(anyString(), any(), anyString()))
+        when(jwtPortOut.generateToken(any(),anyString(), any(), anyString()))
                 .thenReturn("mocked-jwt-token");
 
         // WHEN
@@ -74,7 +74,7 @@ class AuthServiceTest {
         assertNotNull(response);
         assertEquals("mocked-jwt-token", response.getToken());
 
-        verify(jwtPortOut, times(1)).generateToken(anyString(), any(), anyString());
+        verify(jwtPortOut, times(1)).generateToken(any(),anyString(), any(), anyString());
     }
 
     // =========================================================================
@@ -102,7 +102,7 @@ class AuthServiceTest {
         assertEquals("Credenciales incorrectas", exception.getMessage());
 
         // falló la pass
-        verify(jwtPortOut, never()).generateToken(anyString(), anyString(), anyString());
+        verify(jwtPortOut, never()).generateToken(any(),anyString(), anyString(), anyString());
     }
 
     // =========================================================================
@@ -124,6 +124,6 @@ class AuthServiceTest {
 
         verify(passwordEncoder, never()).matches(anyString(), anyString());
 
-        verify(jwtPortOut, never()).generateToken(anyString(), anyString(), anyString());
+        verify(jwtPortOut, never()).generateToken(any(), anyString(), anyString(), anyString());
     }
 }

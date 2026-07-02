@@ -10,6 +10,10 @@ import com.ms3.shippingservice.infrastructure.persistency.entity.ShippingEntity;
 import com.ms3.shippingservice.infrastructure.persistency.entity.ShippingStateHistoryEntity;
 import com.ms3.shippingservice.infrastructure.persistency.repository.JpaCategoryRepository;
 import com.ms3.shippingservice.infrastructure.persistency.repository.JpaShippingRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -54,7 +58,6 @@ public class ShippingRepositoryAdapter implements ShippingPortOut {
             entity.setCurrentState(shipping.getCurrentState());
             entity.setUpdatedAt(shipping.getUpdatedAt());
 
-// Solo necesitamos añadir lo que no existe en la base de datos (los nuevos registros)
             if (shipping.getStateHistory() != null) {
                 for (ShippingStateHistory histDomain : shipping.getStateHistory()) {
                     if (histDomain.getId() == null) {
@@ -119,5 +122,28 @@ public class ShippingRepositoryAdapter implements ShippingPortOut {
         return entities.stream()
                 .map(ShippingMapper::toDomain)
                 .toList();
+    }
+
+    @Override
+    public List<Shipping> findAll() {
+        List<ShippingEntity> entities = jpaRepository.findAllByOrderByCreatedAtDesc();
+        return entities.stream()
+                .map(ShippingMapper::toDomain)
+                .toList();
+    }
+
+    @Override
+    public List<Shipping> findByCreatedBy(UUID id) {
+        List<ShippingEntity> entities = jpaRepository.findShippingsByUserOrdered(id);
+        return entities.stream()
+                .map(ShippingMapper::toDomain)
+                .toList();
+    }
+
+    @Override
+    public Page<Shipping> findAllPage(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by("createdAt").ascending());
+        Page<ShippingEntity> entityPage = jpaRepository.findAll(pageable);
+        return entityPage.map(ShippingMapper::toDomain);
     }
 }

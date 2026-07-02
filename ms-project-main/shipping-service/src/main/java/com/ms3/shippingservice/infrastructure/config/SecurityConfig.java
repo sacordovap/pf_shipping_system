@@ -62,6 +62,7 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/actuator/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/v1/shippings").hasAnyRole("ADMIN", "OPERADOR", "CLIENTE")
                         .requestMatchers(HttpMethod.GET, "/api/v1/shippings/tracking/*").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/v1/categories").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/v1/shippings/tracking/*/history").hasAnyRole("ADMIN", "OPERADOR", "CLIENTE")

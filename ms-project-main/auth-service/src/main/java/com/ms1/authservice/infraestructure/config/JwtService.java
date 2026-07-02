@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
+import java.util.UUID;
 
 @Component
 public class JwtService implements JwtPortOut {
@@ -20,10 +21,11 @@ public class JwtService implements JwtPortOut {
     @Value("${jwt.secret}")
     private String secret;
 
-    public String generateToken(String email, String username, String role) {
+    public String generateToken(UUID userId, String email, String username, String role) {
         return Jwts.builder()
                 .subject(email)
                 .claim("username", username)
+                .claim("userId", userId)
                 .issuedAt(new Date())
                 .claim("role", role)
                 .expiration(new Date(System.currentTimeMillis() + expiration))

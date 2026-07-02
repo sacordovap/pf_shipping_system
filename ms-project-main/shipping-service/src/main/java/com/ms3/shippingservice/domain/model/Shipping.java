@@ -30,6 +30,9 @@ public class Shipping {
     private ShippingState currentState;
     private List<Category> categories = new ArrayList<>();
     private List<ShippingStateHistory> stateHistory = new ArrayList<>();
+
+    private UUID createdBy;
+
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 

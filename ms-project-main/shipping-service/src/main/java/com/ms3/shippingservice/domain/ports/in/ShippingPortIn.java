@@ -20,4 +20,5 @@ public interface ShippingPortIn {
     List<ShippingStateHistory> getHistoryByTracking(String trackingNumber);
     List<Shipping> getByCategoryAndState(String category, ShippingState state);
     List<Shipping> getByName(String name);
+    List<Shipping> getAllShipping();
 }

@@ -36,6 +36,7 @@ public class ShippingMapper {
         domain.setCurrentState(entity.getCurrentState());
         domain.setCreatedAt(entity.getCreatedAt());
         domain.setUpdatedAt(entity.getUpdatedAt());
+        domain.setCreatedBy(entity.getCreatedBy());
 
         if (entity.getCategories() != null) {
             domain.setCategories(new ArrayList<>(entity.getCategories().stream()
@@ -72,6 +73,7 @@ public class ShippingMapper {
         entity.setDeclaredValue(domain.getDeclaredValue());
         entity.setShippingCost(domain.getShippingCost());
         entity.setCurrentState(domain.getCurrentState());
+        entity.setCreatedBy(domain.getCreatedBy());
 
         entity.setCreatedAt(domain.getCreatedAt() != null ? domain.getCreatedAt() : LocalDateTime.now());
         entity.setUpdatedAt(domain.getUpdatedAt() != null ? domain.getUpdatedAt() : LocalDateTime.now());

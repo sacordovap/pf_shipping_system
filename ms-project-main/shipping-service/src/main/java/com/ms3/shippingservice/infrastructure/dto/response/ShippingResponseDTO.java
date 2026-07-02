@@ -13,7 +13,7 @@ import java.util.UUID;
 @Getter
 @Setter
 public class ShippingResponseDTO {
-//    private UUID id;
+    private UUID id;
     private String trackingNumber;
 
     private String dniRemitente;
@@ -28,6 +28,7 @@ public class ShippingResponseDTO {
     private BigDecimal declaredValue;
     private BigDecimal shippingCost;
     private ShippingState currentState;
+    private UUID createdBy;
     private List<String> categories;
     private LocalDateTime createdAt;
 //    private LocalDateTime updatedAt;
@@ -36,7 +37,7 @@ public class ShippingResponseDTO {
         if (domain == null) return null;
 
         ShippingResponseDTO dto = new ShippingResponseDTO();
-//        dto.setId(domain.getId());
+        dto.setId(domain.getId());
         dto.setTrackingNumber(domain.getTrackingNumber());
 
         dto.setDniRemitente(domain.getDniRemitente());
@@ -55,6 +56,8 @@ public class ShippingResponseDTO {
         dto.setShippingCost(domain.getShippingCost());
         dto.setCurrentState(domain.getCurrentState());
         dto.setCreatedAt(domain.getCreatedAt());
+
+        dto.setCreatedBy(domain.getCreatedBy());
 //        dto.setUpdatedAt(domain.getUpdatedAt());
 
         if (domain.getCategories() != null) {

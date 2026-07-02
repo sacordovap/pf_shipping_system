@@ -13,5 +13,5 @@ public interface CustomerJpaRepository extends JpaRepository<CustomerEntity, UUI
     Optional<CustomerEntity> findByDni(String dni);
     Optional<CustomerEntity> findByEmail(String email);
     List<CustomerEntity> findByActiveTrue();
-
+    List<CustomerEntity> findAllByOrderByIdAsc();
 }

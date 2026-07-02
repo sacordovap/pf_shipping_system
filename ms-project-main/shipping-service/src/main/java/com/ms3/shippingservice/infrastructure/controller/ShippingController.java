@@ -86,6 +86,15 @@ public class ShippingController {
         ));
     }
 
+    @GetMapping()
+    public ResponseEntity<ApiResponse<List<ShippingResponseDTO>>> getAll() {
+        return ResponseEntity.ok(new ApiResponse<>(
+                true,
+                "Envios Registrados",
+                mapper.toResponseList(shippingPortIn.getAllShipping())
+        ));
+    }
+
     @GetMapping("/search")
     public ResponseEntity<ApiResponse<List<ShippingResponseDTO>>> searchByTrackingPartial(@RequestParam String term) {
         return ResponseEntity.ok(new ApiResponse<>(
@@ -144,21 +153,4 @@ public class ShippingController {
                 mapper.toResponse(shippingPortIn.deleteShipping(id, operatorUsername))
         ));
     }
-
-//    @PutMapping("/{id}")
-////    @PreAuthorize("hasRole('ADMIN')")
-//    public ResponseEntity<ApiResponse<PackageResponseDTO>> updatePackage(
-//            @PathVariable UUID id,
-//            @Valid @RequestBody UpdatePackageRequest request) {
-//
-//        var updated = shippingPortIn.update(id, request.toDomain());
-//
-//        return ResponseEntity.ok(new ApiResponse<>(
-//                true,
-//                "Paquete actualizado exitosamente",
-//                mapper.toResponse(updated)
-//        ));
-//    }
-//
-
 }

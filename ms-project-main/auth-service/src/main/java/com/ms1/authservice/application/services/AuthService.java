@@ -41,7 +41,7 @@ public class AuthService implements AuthPortIn {
         user.setActive(true);
 
         User savedUser = userPortOut.save(user);
-        String token = jwtPortOut.generateToken(savedUser.getEmail(),savedUser.getUsername(),savedUser.getRole().name());
+        String token = jwtPortOut.generateToken(savedUser.getId(),savedUser.getEmail(),savedUser.getUsername(),savedUser.getRole().name());
 
         return createAuthResponse(savedUser, token);
     }
@@ -56,7 +56,7 @@ public class AuthService implements AuthPortIn {
         if (!passwordEncoder.matches(password, user.getPassword())) {
             throw new BadCredentialsException(MSG_ERROR_AUTH);
         }
-        String token = jwtPortOut.generateToken(user.getEmail(), user.getUsername(), user.getRole().name());
+        String token = jwtPortOut.generateToken(user.getId(), user.getEmail(), user.getUsername(), user.getRole().name());
         return createAuthResponse(user, token);
     }
 
@@ -102,6 +102,7 @@ public class AuthService implements AuthPortIn {
     }
 
     private AuthResponse createAuthResponse(User user, String token) {
-        return new AuthResponse(token, user.getEmail(), user.getUsername(),user.getRole().name());
+//        return new AuthResponse(token, user.getEmail(), user.getUsername(),user.getRole().name());
+        return new AuthResponse(token);
     }
 }

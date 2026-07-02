@@ -58,6 +58,9 @@ public class ShippingEntity {
     @Column(name = "current_state", nullable = false, length = 30)
     private ShippingState currentState;
 
+    @Column(name = "created_by", nullable = false)
+    private UUID createdBy;
+
     // --- RELACIÓN MUCHOS A MUCHOS  ---
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(

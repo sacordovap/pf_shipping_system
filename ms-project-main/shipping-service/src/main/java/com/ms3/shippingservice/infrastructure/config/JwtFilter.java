@@ -1,8 +1,7 @@
 package com.ms3.shippingservice.infrastructure.config;
 
+
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -15,7 +14,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 
@@ -44,10 +42,14 @@ public class JwtFilter extends OncePerRequestFilter {
 
         try {
             if (jwtService.isTokenValid(token)) {
-                // 1. Extraemos el username
-                String userName = jwtService.extractUsername(token);
+                Claims claims = jwtService.extractAllClaims(token);
 
-                String role = jwtService.extractRole(token);
+//                String userName = jwtService.extractUsername(token);
+                String userName = claims.get("username", String.class);
+
+//                String role = jwtService.extractRole(token);
+
+                String role = claims.get("role", String.class);
 
                 if (userName != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                     if (role != null && !role.startsWith("ROLE_")) {
@@ -58,6 +60,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
                     UsernamePasswordAuthenticationToken authToken =
                             new UsernamePasswordAuthenticationToken(userName, token, authorities);
+                    authToken.setDetails(claims);
 
                     SecurityContextHolder.getContext().setAuthentication(authToken);
                 }
