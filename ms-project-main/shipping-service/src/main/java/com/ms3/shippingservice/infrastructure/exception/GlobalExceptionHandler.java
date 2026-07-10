@@ -132,4 +132,10 @@ public class GlobalExceptionHandler {
                 .body(new ApiResponse<>(false, message, null));
     }
 
+
+    @ExceptionHandler(InvalidTrackingFormatException.class)
+    public ResponseEntity<ApiResponse<Void>> handleInvalidTracking(InvalidTrackingFormatException ex) {
+        ApiResponse<Void> error = new ApiResponse<>(false, ex.getMessage(), null);
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
+    }
 }

@@ -21,5 +21,5 @@ public interface ShippingPortOut {
     List<Shipping> findByName(String name);
     List<Shipping> findAll();
     List<Shipping> findByCreatedBy(UUID id);
-    Page<Shipping> findAllPage(int page, int size);
+    Page<Shipping> findByPage(int page, int size);
 }

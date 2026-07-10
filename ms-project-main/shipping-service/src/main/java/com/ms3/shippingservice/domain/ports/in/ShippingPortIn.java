@@ -3,6 +3,7 @@ package com.ms3.shippingservice.domain.ports.in;
 import com.ms3.shippingservice.domain.model.Shipping;
 import com.ms3.shippingservice.domain.model.ShippingState;
 import com.ms3.shippingservice.domain.model.ShippingStateHistory;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,4 +22,6 @@ public interface ShippingPortIn {
     List<Shipping> getByCategoryAndState(String category, ShippingState state);
     List<Shipping> getByName(String name);
     List<Shipping> getAllShipping();
+    List<Shipping> getCreatedBy();
+    Page<Shipping> getByPage(int page, int size);
 }

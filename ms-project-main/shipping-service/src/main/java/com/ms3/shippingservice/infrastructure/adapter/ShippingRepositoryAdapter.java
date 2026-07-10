@@ -141,9 +141,9 @@ public class ShippingRepositoryAdapter implements ShippingPortOut {
     }
 
     @Override
-    public Page<Shipping> findAllPage(int page, int size) {
-        Pageable pageable = PageRequest.of(page, size, Sort.by("createdAt").ascending());
-        Page<ShippingEntity> entityPage = jpaRepository.findAll(pageable);
+    public Page<Shipping> findByPage(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by("createdAt").descending());
+        Page<ShippingEntity> entityPage = jpaRepository.findByPage(pageable);
         return entityPage.map(ShippingMapper::toDomain);
     }
 }

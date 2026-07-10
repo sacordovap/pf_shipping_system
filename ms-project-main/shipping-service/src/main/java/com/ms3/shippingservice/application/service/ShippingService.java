@@ -1,5 +1,6 @@
 package com.ms3.shippingservice.application.service;
 
+import com.ms3.shippingservice.application.util.TrackingGenerator;
 import com.ms3.shippingservice.domain.model.Category;
 import com.ms3.shippingservice.domain.model.Shipping;
 import com.ms3.shippingservice.domain.model.ShippingState;
@@ -9,10 +10,12 @@ import com.ms3.shippingservice.domain.ports.out.CustomerValidationPortOut;
 import com.ms3.shippingservice.domain.ports.out.ShippingPortOut;
 import com.ms3.shippingservice.infrastructure.dto.response.ApiResponse;
 import com.ms3.shippingservice.infrastructure.dto.response.CustomerFeignDto;
+import com.ms3.shippingservice.infrastructure.exception.InvalidTrackingFormatException;
 import com.ms3.shippingservice.infrastructure.exception.ResourceNotFoundException;
 import com.ms3.shippingservice.infrastructure.security.SecurityUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -46,10 +49,12 @@ public class ShippingService implements ShippingPortIn {
     public Shipping createShipping(Shipping shipping, List<UUID> categoryIds, String operatorUsername) {
 
         UUID userId = securityUtils.getCurrentUserId();
+        String tracking = TrackingGenerator.generateUniqueTracking();
         boolean isRemitValid = customerValidationPortOut.isCustomerValid(shipping.getDniRemitente());
         boolean isDestValid = customerValidationPortOut.isCustomerValid(shipping.getDniDestinatario());
-
-
+        if (!tracking.matches("TRK-[A-Z0-9]+-[A-Z0-9]+")) {
+            throw new InvalidTrackingFormatException("Formato de tracking inválido");
+        }
         if (!isRemitValid) {
             throw new ResourceNotFoundException("El remitente no está registrado o está inactivo.");
         }
@@ -76,7 +81,8 @@ public class ShippingService implements ShippingPortIn {
         shipping.setCreatedBy(userId);
         shipping.calculateShippingCost(this.base, this.factorPeso,this.insureance);
         shipping.initialize(ShippingState.REGISTRADO, operatorUsername);
-        shipping.setTrackingNumber("TRK-" + UUID.randomUUID().toString().substring(0, 8).toUpperCase());
+//        shipping.setTrackingNumber("TRK-" + UUID.randomUUID().toString().substring(0, 8).toUpperCase());
+        shipping.setTrackingNumber(tracking);
         return shippingPortOut.save(shipping);
     }
 
@@ -175,12 +181,21 @@ public class ShippingService implements ShippingPortIn {
 
     @Override
     public List<Shipping> getAllShipping() {
-        String role = securityUtils.getCurrentUserRole();
-        if ("CLIENTE".equals(role)) {
-            UUID userId = securityUtils.getCurrentUserId();
-            return shippingPortOut.findByCreatedBy(userId);
-        } else {
             return shippingPortOut.findAll();
-        }
+    }
+
+    @Override
+    public List<Shipping> getCreatedBy() {
+        UUID userId = securityUtils.getCurrentUserId();
+        return shippingPortOut.findByCreatedBy(userId);
+    }
+
+    @Override
+    public Page<Shipping> getByPage(int page, int size) {
+        // Usuario envía 1 ->  busca 0
+        int pageToFetch = (page > 0) ? page - 1 : 0;
+        int pageSize = (size <= 0) ? 12 : size;
+
+        return shippingPortOut.findByPage(pageToFetch, pageSize);
     }
 }

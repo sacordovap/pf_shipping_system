@@ -6,8 +6,10 @@ import com.ms3.shippingservice.domain.ports.in.ShippingPortIn;
 import com.ms3.shippingservice.infrastructure.dto.request.CreateShippingRequest;
 import com.ms3.shippingservice.infrastructure.dto.request.UpdateStateRequest;
 import com.ms3.shippingservice.infrastructure.dto.response.ApiResponse;
+import com.ms3.shippingservice.infrastructure.dto.response.PageResponseDTO;
 import com.ms3.shippingservice.infrastructure.dto.response.ShippingResponseDTO;
 import com.ms3.shippingservice.infrastructure.exception.ResourceNotFoundException;
+import com.ms3.shippingservice.infrastructure.mapper.ShippingPaginationMapper;
 import com.ms3.shippingservice.infrastructure.mapper.ShippingResponseMapper;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -24,10 +26,12 @@ public class ShippingController {
 
     private final ShippingPortIn shippingPortIn;
     private final ShippingResponseMapper mapper; // Inyectamos el mapper
+    private final ShippingPaginationMapper shippingPaginationMapper;
 
-    public ShippingController(ShippingPortIn shippingPortIn, ShippingResponseMapper mapper) {
+    public ShippingController(ShippingPortIn shippingPortIn, ShippingResponseMapper mapper, ShippingPaginationMapper shippingPaginationMapper) {
         this.shippingPortIn = shippingPortIn;
         this.mapper = mapper;
+        this.shippingPaginationMapper = shippingPaginationMapper;
     }
 
     @PostMapping
@@ -55,7 +59,7 @@ public class ShippingController {
         ));
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/detail/{id}")
     public ResponseEntity<ApiResponse<ShippingResponseDTO>> getById(@PathVariable UUID id) {
         return ResponseEntity.ok(new ApiResponse<>(
                 true,
@@ -93,6 +97,23 @@ public class ShippingController {
                 "Envios Registrados",
                 mapper.toResponseList(shippingPortIn.getAllShipping())
         ));
+    }
+
+    @GetMapping("/my-shippings")
+    public ResponseEntity<ApiResponse<List<ShippingResponseDTO>>> getAllBy() {
+        return ResponseEntity.ok(new ApiResponse<>(
+                true,
+                "Envios Registrados",
+                mapper.toResponseList(shippingPortIn.getCreatedBy())
+        ));
+    }
+
+    @GetMapping("/get-shippings")
+    public ResponseEntity<ApiResponse<PageResponseDTO<ShippingResponseDTO>>> getPaged(
+            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "12") int size) {
+
+        return ResponseEntity.ok(shippingPaginationMapper.toPagedResponse(shippingPortIn.getByPage(page, size)));
     }
 
     @GetMapping("/search")
