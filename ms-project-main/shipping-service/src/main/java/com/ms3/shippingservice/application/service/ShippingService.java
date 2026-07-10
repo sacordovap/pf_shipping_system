@@ -198,4 +198,12 @@ public class ShippingService implements ShippingPortIn {
 
         return shippingPortOut.findByPage(pageToFetch, pageSize);
     }
+
+    @Override
+    public Page<Shipping> getShippingsByUserPaged(int page, int size) {
+        UUID userId = securityUtils.getCurrentUserId();
+        int pageToFetch = (page > 0) ? page - 1 : 0;
+        int pageSize = (size <= 0) ? 12 : size;
+        return shippingPortOut.findShippingsByUser(userId, pageToFetch, pageSize);
+    }
 }

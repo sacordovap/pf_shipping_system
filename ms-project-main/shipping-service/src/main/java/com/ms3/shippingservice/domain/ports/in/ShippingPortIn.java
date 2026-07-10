@@ -24,4 +24,5 @@ public interface ShippingPortIn {
     List<Shipping> getAllShipping();
     List<Shipping> getCreatedBy();
     Page<Shipping> getByPage(int page, int size);
+    Page<Shipping> getShippingsByUserPaged(int page, int size);
 }

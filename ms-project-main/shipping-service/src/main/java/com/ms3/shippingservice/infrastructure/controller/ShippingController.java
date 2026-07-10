@@ -108,12 +108,20 @@ public class ShippingController {
         ));
     }
 
-    @GetMapping("/get-shippings")
+    @GetMapping("/paged")
     public ResponseEntity<ApiResponse<PageResponseDTO<ShippingResponseDTO>>> getPaged(
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "12") int size) {
 
         return ResponseEntity.ok(shippingPaginationMapper.toPagedResponse(shippingPortIn.getByPage(page, size)));
+    }
+
+    @GetMapping("/user/paged")
+    public ResponseEntity<ApiResponse<PageResponseDTO<ShippingResponseDTO>>> getPagedBy(
+            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "12") int size) {
+
+        return ResponseEntity.ok(shippingPaginationMapper.toPagedResponse(shippingPortIn.getShippingsByUserPaged(page, size)));
     }
 
     @GetMapping("/search")

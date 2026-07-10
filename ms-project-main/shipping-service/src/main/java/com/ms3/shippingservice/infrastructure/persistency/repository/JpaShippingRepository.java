@@ -43,6 +43,9 @@ public interface JpaShippingRepository extends JpaRepository<ShippingEntity, UUI
     @Query("SELECT s FROM ShippingEntity s ORDER BY s.createdAt DESC")
     Page<ShippingEntity> findByPage(Pageable pageable);
 
+    @Query("SELECT s FROM ShippingEntity s WHERE s.createdBy = :userId")
+    Page<ShippingEntity> findMyshippingByPage(@Param("userId") UUID userId, Pageable pageable);
+
     @Query("SELECT s FROM ShippingEntity s WHERE s.createdBy = :userId ORDER BY s.createdAt DESC")
     List<ShippingEntity> findShippingsByUserOrdered(@Param("userId") UUID userId);
 

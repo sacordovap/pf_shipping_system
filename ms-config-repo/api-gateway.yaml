@@ -2,6 +2,10 @@ server:
   port: 8080
 
 spring:
+  data:
+    redis:
+      host: localhost # host de Redis
+      port: 6379
   cloud:
     gateway:
       discovery:
@@ -21,6 +25,12 @@ spring:
           uri: lb://SHIPPING-SERVICE
           predicates:
             - Path=/api/v1/shippings/**, /api/v1/categories/**
+          filters:
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 10 # peticiones por segundo
+                redis-rate-limiter.burstCapacity: 20 # peticiones acumuladas
+                key-resolver: "#{@ipKeyResolver}"
             
 
 eureka:
