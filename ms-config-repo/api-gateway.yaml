@@ -31,7 +31,6 @@ spring:
                 redis-rate-limiter.replenishRate: 1 # peticiones por segundo
                 redis-rate-limiter.burstCapacity: 1 # peticiones acumuladas
                 key-resolver: "#{@ipKeyResolver}"
-                status-code: 429
 
 eureka:
   client:
