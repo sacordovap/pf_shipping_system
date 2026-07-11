@@ -185,14 +185,23 @@ services:
     environment:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka
       SPRING_CONFIG_IMPORT: optional:configserver:http://config-server:8888
+      SPRING_DATA_REDIS_HOST: redis
     depends_on:
       config-server:
         condition: service_healthy
       eureka-server:
         condition: service_healthy
+      redis:
+        condition: service_started
     networks:
       - ms-network
     restart: on-failure
+
+  redis:
+    image: redis:alpine
+    container_name: redis
+    networks:
+      - ms-network
 
 volumes:
   auth-data:

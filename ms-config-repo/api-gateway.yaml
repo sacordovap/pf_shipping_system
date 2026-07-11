@@ -4,7 +4,7 @@ server:
 spring:
   data:
     redis:
-      host: localhost # host de Redis
+      host: ${SPRING_DATA_REDIS_HOST:localhost} # host de Redis
       port: 6379
   cloud:
     gateway:
