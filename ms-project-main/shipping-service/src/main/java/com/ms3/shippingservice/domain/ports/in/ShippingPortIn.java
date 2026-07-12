@@ -3,6 +3,7 @@ package com.ms3.shippingservice.domain.ports.in;
 import com.ms3.shippingservice.domain.model.Shipping;
 import com.ms3.shippingservice.domain.model.ShippingState;
 import com.ms3.shippingservice.domain.model.ShippingStateHistory;
+import com.ms3.shippingservice.infrastructure.dto.request.ShippingFilterRequest;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
@@ -25,4 +26,10 @@ public interface ShippingPortIn {
     List<Shipping> getCreatedBy();
     Page<Shipping> getByPage(int page, int size);
     Page<Shipping> getShippingsByUserPaged(int page, int size);
+
+    //Filters}
+    Page<Shipping> searchShippingsFilter(String branch, ShippingState state, String category,
+                                   String term, String name, int page, int size, boolean manual);
+    //Filterwithbody
+    Page<Shipping> searchShippingsFilter(ShippingFilterRequest request);
 }

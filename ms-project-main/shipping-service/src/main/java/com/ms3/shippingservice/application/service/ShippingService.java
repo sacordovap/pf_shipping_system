@@ -8,6 +8,7 @@ import com.ms3.shippingservice.domain.model.ShippingStateHistory;
 import com.ms3.shippingservice.domain.ports.in.ShippingPortIn;
 import com.ms3.shippingservice.domain.ports.out.CustomerValidationPortOut;
 import com.ms3.shippingservice.domain.ports.out.ShippingPortOut;
+import com.ms3.shippingservice.infrastructure.dto.request.ShippingFilterRequest;
 import com.ms3.shippingservice.infrastructure.dto.response.ApiResponse;
 import com.ms3.shippingservice.infrastructure.dto.response.CustomerFeignDto;
 import com.ms3.shippingservice.infrastructure.exception.InvalidTrackingFormatException;
@@ -205,5 +206,28 @@ public class ShippingService implements ShippingPortIn {
         int pageToFetch = (page > 0) ? page - 1 : 0;
         int pageSize = (size <= 0) ? 12 : size;
         return shippingPortOut.findShippingsByUser(userId, pageToFetch, pageSize);
+    }
+
+    @Override
+    public Page<Shipping> searchShippingsFilter(String branch, ShippingState state, String category,
+                                          String term, String name, int page, int size, boolean manual) {
+        if (manual) {
+            return shippingPortOut.searchManual(branch, state, category, term, name, page, size);
+        }
+        return shippingPortOut.searchDynamic(branch, state, category, term, name, page, size);
+    }
+
+    @Override
+    public Page<Shipping> searchShippingsFilter(ShippingFilterRequest request) {
+        if (request.isManual()) {
+            return shippingPortOut.searchManual(
+                    request.getBranch(), request.getState(), request.getCategory(),
+                    request.getTerm(), request.getName(), request.getPage(), request.getSize()
+            );
+        }
+        return shippingPortOut.searchDynamic(
+                request.getBranch(), request.getState(), request.getCategory(),
+                request.getTerm(), request.getName(), request.getPage(), request.getSize()
+        );
     }
 }

@@ -10,6 +10,8 @@ import com.ms3.shippingservice.infrastructure.persistency.entity.ShippingEntity;
 import com.ms3.shippingservice.infrastructure.persistency.entity.ShippingStateHistoryEntity;
 import com.ms3.shippingservice.infrastructure.persistency.repository.JpaCategoryRepository;
 import com.ms3.shippingservice.infrastructure.persistency.repository.JpaShippingRepository;
+import com.ms3.shippingservice.infrastructure.persistency.repository.JpaShippingRepositoryFilter;
+import com.ms3.shippingservice.infrastructure.persistency.specification.ShippingSpecs;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -26,10 +28,12 @@ public class ShippingRepositoryAdapter implements ShippingPortOut {
 
     private final JpaShippingRepository jpaRepository;
     private final JpaCategoryRepository jpaCategoryRepository;
+    private final JpaShippingRepositoryFilter jpaShippingRepositoryFilter;
 
-    public ShippingRepositoryAdapter(JpaShippingRepository jpaRepository, JpaCategoryRepository jpaCategoryRepository) {
+    public ShippingRepositoryAdapter(JpaShippingRepository jpaRepository, JpaCategoryRepository jpaCategoryRepository, JpaShippingRepositoryFilter jpaShippingRepositoryFilter) {
         this.jpaRepository = jpaRepository;
         this.jpaCategoryRepository = jpaCategoryRepository;
+        this.jpaShippingRepositoryFilter = jpaShippingRepositoryFilter;
     }
 
     @Override
@@ -151,6 +155,44 @@ public class ShippingRepositoryAdapter implements ShippingPortOut {
     public Page<Shipping> findShippingsByUser(UUID userId, int page, int size) {
         Pageable pageable = PageRequest.of(page, size, Sort.by("createdAt").descending());
         Page<ShippingEntity> entityPage = jpaRepository.findMyshippingByPage(userId, pageable);
+        return entityPage.map(ShippingMapper::toDomain);
+    }
+
+    @Override
+    public Page<Shipping> searchDynamic(String branch, ShippingState state, String category,
+                                        String term, String name, int page, int size) {
+        Pageable pageable = PageRequest.of(page - 1, size, Sort.by("createdAt").descending());
+
+        Page<ShippingEntity> entityPage = jpaShippingRepositoryFilter.findAll(
+                ShippingSpecs.search(branch, state, category, term, name),
+                pageable
+        );
+
+        return entityPage.map(ShippingMapper::toDomain);
+    }
+
+    @Override
+    public Page<Shipping> searchManual(String branch,
+                                       ShippingState state,
+                                       String category,
+                                       String term,
+                                       String name,
+                                       int page,
+                                       int size) {
+
+        Pageable pageable = PageRequest.of(page - 1, size);
+
+        String stateValue = state != null ? state.name() : null;
+
+        Page<ShippingEntity> entityPage = jpaRepository.findByFilters(
+                branch,
+                stateValue,
+                category,
+                term,
+                name,
+                pageable
+        );
+
         return entityPage.map(ShippingMapper::toDomain);
     }
 }

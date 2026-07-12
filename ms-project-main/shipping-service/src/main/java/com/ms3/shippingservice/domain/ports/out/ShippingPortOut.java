@@ -23,4 +23,10 @@ public interface ShippingPortOut {
     List<Shipping> findByCreatedBy(UUID id);
     Page<Shipping> findByPage(int page, int size);
     Page<Shipping> findShippingsByUser(UUID userId, int page, int size);
+
+
+    //filters
+    Page<Shipping> searchDynamic(String branch, ShippingState state, String category, String term, String name, int page, int size);
+    Page<Shipping> searchManual(String branch, ShippingState state, String category, String term, String name, int page, int size);
+
 }

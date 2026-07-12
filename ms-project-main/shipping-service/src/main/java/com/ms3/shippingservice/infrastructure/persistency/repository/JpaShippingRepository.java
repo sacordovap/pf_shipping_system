@@ -49,4 +49,27 @@ public interface JpaShippingRepository extends JpaRepository<ShippingEntity, UUI
     @Query("SELECT s FROM ShippingEntity s WHERE s.createdBy = :userId ORDER BY s.createdAt DESC")
     List<ShippingEntity> findShippingsByUserOrdered(@Param("userId") UUID userId);
 
+    @Query(value = """
+    SELECT DISTINCT s.*
+    FROM shippings s
+    LEFT JOIN shipping_categories sc ON s.shipping_id = sc.shipping_id
+    LEFT JOIN categories c ON sc.category_id = c.category_id
+    WHERE (:branch IS NULL OR s.origin_branch = :branch OR s.destination_branch = :branch)
+      AND (:state IS NULL OR s.current_state = :state)
+      AND (:category IS NULL OR c.name = :category)
+      AND (:term IS NULL OR s.tracking_number ILIKE CONCAT('%', :term, '%'))
+      AND (:name IS NULL OR s.remitente ILIKE CONCAT('%', :name, '%')
+           OR s.destinatario ILIKE CONCAT('%', :name, '%'))
+    ORDER BY s.created_at DESC
+    """,
+            nativeQuery = true)
+    Page<ShippingEntity> findByFilters(
+            @Param("branch") String branch,
+            @Param("state") String state,
+            @Param("category") String category,
+            @Param("term") String term,
+            @Param("name") String name,
+            Pageable pageable
+    );
+
 }

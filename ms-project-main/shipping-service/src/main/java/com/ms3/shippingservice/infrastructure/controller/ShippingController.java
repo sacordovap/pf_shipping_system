@@ -4,11 +4,11 @@ import com.ms3.shippingservice.domain.model.ShippingState;
 import com.ms3.shippingservice.domain.model.ShippingStateHistory;
 import com.ms3.shippingservice.domain.ports.in.ShippingPortIn;
 import com.ms3.shippingservice.infrastructure.dto.request.CreateShippingRequest;
+import com.ms3.shippingservice.infrastructure.dto.request.ShippingFilterRequest;
 import com.ms3.shippingservice.infrastructure.dto.request.UpdateStateRequest;
 import com.ms3.shippingservice.infrastructure.dto.response.ApiResponse;
 import com.ms3.shippingservice.infrastructure.dto.response.PageResponseDTO;
 import com.ms3.shippingservice.infrastructure.dto.response.ShippingResponseDTO;
-import com.ms3.shippingservice.infrastructure.exception.ResourceNotFoundException;
 import com.ms3.shippingservice.infrastructure.mapper.ShippingPaginationMapper;
 import com.ms3.shippingservice.infrastructure.mapper.ShippingResponseMapper;
 import jakarta.validation.Valid;
@@ -182,4 +182,30 @@ public class ShippingController {
                 mapper.toResponse(shippingPortIn.deleteShipping(id, operatorUsername))
         ));
     }
+
+
+
+    //filters
+    @GetMapping("/filter/search") //
+    public ResponseEntity<ApiResponse<PageResponseDTO<ShippingResponseDTO>>> search(
+            @RequestParam(required = false) String branch,
+            @RequestParam(required = false) ShippingState state,
+            @RequestParam(required = false) String category,
+            @RequestParam(required = false) String term,
+            @RequestParam(required = false) String name,
+            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "12") int size,
+            @RequestParam(defaultValue = "false") boolean manual) {
+
+        return ResponseEntity.ok(shippingPaginationMapper.toPagedResponse(shippingPortIn.searchShippingsFilter(branch, state, category, term, name, page, size, manual)));
+
+    }
+//    @PostMapping("/filter/search")
+//    public ResponseEntity<ApiResponse<PageResponseDTO<ShippingResponseDTO>>> search(
+//            @RequestBody ShippingFilterRequest request) {
+//
+//        return ResponseEntity.ok(shippingPaginationMapper.toPagedResponse(
+//                shippingPortIn.searchShippingsFilter(request)
+//        ));
+//    }
 }
